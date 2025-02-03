@@ -1,5 +1,33 @@
 .ORIG x3000
 
+START
 
+LD R0, VAR_X
+LD R1, VAR_Y
+
+
+; Two's Complement
+NOT R1, R1
+ADD R1, R1, #1
+
+ADD R0, R0, R1
+
+BRz IF_ZERO
+BRnzp ELSE
+
+IF_ZERO
+AND R3, R3, #0
+ADD R3, R3, #5
+BRnzp END_IF
+
+ELSE
+; TODO
+
+END_IF
+
+HALT
+
+VAR_X .FILL #6
+VAR_Y .FILL #3
 
 .END
