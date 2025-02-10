@@ -1,0 +1,9 @@
+.ORIG X3000
+
+GETC
+ADD R0, R0, #1
+OUT
+
+HALT
+
+.END
