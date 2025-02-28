@@ -1,0 +1,51 @@
+IEEE 754 64-bit floating point standard:
+    bit 0: positive on 0, negative on 1
+    bit 1-11: exponent
+    bit 12-63: mantissa
+    12.375 to binary:
+        1. 12 = 1100
+        2. Multiply decimal by 2 repeatedly and use integer
+            a. 0.375 * 2 = 0.75 -> 0
+            b. 0.75 * 2 = 1.5 -> 1
+            c. 0.5 *2 = 1.0 -> 1
+        3. 1100.011 = 1.100011 x 2^3
+        4. Take exponent from scientific notation and add 1023
+            a. 3 + 1023 = 1026 -> 10000000010
+        5. Drop leading 1 from mantissa and add 0's to get it to 52 bits
+
+Pseudo Ops are not translated into machine language instructions, they are just instructions for the assembler
+    (ex. .ORIG, .FILL, .END)
+
+Dereferncing a pointer in c,  by using *ptr, accesses the value stored in that memory location
+
+Operation Format:
+    bit 15-12: OPCODE
+    bit 11-0: Operands
+
+(Trap) routines are provided by the specific LC3 and stored in a vector table
+called using (TRAP x21)(outputs a character)
+
+Subroutines are user made
+called using JSR name
+
+Runtime Stack:
+    R7 - stores return address
+    R6 - points to the top of the stack
+    R5 - points to the previous frame pointer
+    R4 - points to global variables in memory
+    R3-R0 - general purpose registers
+
+C Compiling Process:
+    1. Preprocessing: Handles macroinstructions, #include, ...
+    2. Source Code Analysis
+    3. Symbol Table Generation: Stores information on variables, functions, and memory locations
+    4. Assembly Code Conversion
+
+Store: Register -> Memory
+    Store Direct: ST R1, NAME (NAME .FILL X5000) (stores value in R1 at address x5000)
+    Store Indirect: STI R1, NAME (NAME .FILL x5000) (stores value in R1 at address stored in x5000)
+Load: Memory -> Register
+    Load Direct: LD R1, NAME (NAME .FILL x5000) (loads value at address that is stored in x5000 into R1)
+    Load Indirect: LDI R1, NAME (NAME .FILL x5000) (loads value at address x5000 into R1)
+
+
